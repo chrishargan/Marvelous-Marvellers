@@ -1,8 +1,9 @@
 import {key} from './Key';
 
-let url = 'https://superheroapi.com/api/' + key + '/1/powerstats/';
+//let url = 'http://superheroapi.com/api.php/' + key + '/1';
+let url = 'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json';
 console.log(url);
 
-fetch(url, {mode: 'no-cors'})
+fetch(url)
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => console.log(data));

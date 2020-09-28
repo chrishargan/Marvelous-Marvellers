@@ -117,33 +117,21 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"Key.ts":[function(require,module,exports) {
+})({"index.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
-});
-exports.key = void 0;
-exports.key = '2765677036868051';
-},{}],"index.ts":[function(require,module,exports) {
-"use strict";
+}); //let url = 'http://superheroapi.com/api.php/' + key + '/1';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var Key_1 = require("./Key");
-
-var url = 'https://superheroapi.com/api/' + Key_1.key + '/1/powerstats/';
+var url = 'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json';
 console.log(url);
-fetch(url, {
-  mode: 'no-cors'
-}).then(function (response) {
+fetch(url).then(function (response) {
   return response.json();
 }).then(function (data) {
   return console.log(data);
 });
-},{"./Key":"Key.ts"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
