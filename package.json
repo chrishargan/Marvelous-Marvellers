@@ -1,0 +1,24 @@
+{
+  "name": "Marvelous-Marvellers",
+  "version": "1.0.0",
+  "description": "A Marvel Api group Project",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrishargan/Marvelous-Marvellers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrishargan/Marvelous-Marvellers/issues"
+  },
+  "homepage": "https://github.com/chrishargan/Marvelous-Marvellers#readme",
+  "dependencies": {
+    "md5": "^2.3.0",
+    "md5-typescript": "^1.0.5"
+  }
+}
