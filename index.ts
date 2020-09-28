@@ -1,14 +1,8 @@
-import {key, privateKey} from './Key';
-import {Md5} from "md5-typescript";
+import {key} from './Key';
 
-console.log(Md5.init('test'));
+let url = 'https://superheroapi.com/api/' + key + '/1/powerstats/';
+console.log(url);
 
-const apiKey = key;
-const hash = '697d2495efd5e542816d2261a01898d8';
-//let hash = Md5.init(1 + privateKey + key);
-let url = 'http://gateway.marvel.com/v1/public/characters?ts=1&apikey=' + key + '&hash=' + hash;
-console.log(hash);
-
-fetch(url)
+fetch(url, {mode: 'no-cors'})
     .then(response => response.json())
     .then(data => console.log(data))
