@@ -120,27 +120,37 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"class/CharacterList.ts":[function(require,module,exports) {
 "use strict";
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.CharacterList = void 0;
 
-var CharacterList =
-/** @class */
-function () {
+var CharacterList = /*#__PURE__*/function () {
   function CharacterList() {
+    _classCallCheck(this, CharacterList);
+
     this.map = new Map();
   }
 
-  CharacterList.prototype.add = function (hero) {
-    this.map.set(hero.name, hero);
-  };
-
-  CharacterList.prototype.search = function (name) {
-    if (this.map.has(name)) {
-      return this.map.get(name);
-    } else return null;
-  };
+  _createClass(CharacterList, [{
+    key: "add",
+    value: function add(hero) {
+      this.map.set(hero.slug, hero);
+    }
+  }, {
+    key: "search",
+    value: function search(name) {
+      if (this.map.has(name)) {
+        return this.map.get(name);
+      } else return null;
+    }
+  }]);
 
   return CharacterList;
 }();
@@ -149,36 +159,50 @@ exports.CharacterList = CharacterList;
 },{}],"class/Character.ts":[function(require,module,exports) {
 "use strict";
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Character = void 0;
 
-var Stats =
-/** @class */
-function () {
-  function Stats() {}
+var Character = /*#__PURE__*/function () {
+  function Character(id, name, slug, stats, avatar) {
+    _classCallCheck(this, Character);
 
-  return Stats;
-}();
-
-var Character =
-/** @class */
-function () {
-  function Character(id, name, stats, avatar) {
     this.id = id;
     this._name = name;
-    this.stats = stats;
+    this._slug = slug;
+    this._stats = stats;
     this.avatar = avatar;
   }
 
-  Object.defineProperty(Character.prototype, "name", {
+  _createClass(Character, [{
+    key: "showPrice",
+    value: function showPrice() {
+      return (this._stats.intelligence + this._stats.combat + this._stats.durability + this._stats.strength + this._stats.power + this._stats.speed) * 3;
+    }
+  }, {
+    key: "name",
     get: function get() {
       return this._name;
-    },
-    enumerable: false,
-    configurable: true
-  });
+    }
+  }, {
+    key: "slug",
+    get: function get() {
+      return this._slug;
+    }
+  }, {
+    key: "stats",
+    get: function get() {
+      return this._stats;
+    }
+  }]);
+
   return Character;
 }();
 
@@ -186,22 +210,60 @@ exports.Character = Character;
 },{}],"class/Stats.ts":[function(require,module,exports) {
 "use strict";
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Stats = void 0;
 
-var Stats =
-/** @class */
-function () {
+var Stats = /*#__PURE__*/function () {
   function Stats(intelligence, strength, speed, durability, power, combat) {
-    this.intelligence = intelligence;
-    this.strength = strength;
-    this.speed = speed;
-    this.durability = durability;
-    this.power = power;
-    this.combat = combat;
+    _classCallCheck(this, Stats);
+
+    this._intelligence = intelligence;
+    this._strength = strength;
+    this._speed = speed;
+    this._durability = durability;
+    this._power = power;
+    this._combat = combat;
   }
+
+  _createClass(Stats, [{
+    key: "intelligence",
+    get: function get() {
+      return this._intelligence;
+    }
+  }, {
+    key: "strength",
+    get: function get() {
+      return this._strength;
+    }
+  }, {
+    key: "speed",
+    get: function get() {
+      return this._speed;
+    }
+  }, {
+    key: "durability",
+    get: function get() {
+      return this._durability;
+    }
+  }, {
+    key: "power",
+    get: function get() {
+      return this._power;
+    }
+  }, {
+    key: "combat",
+    get: function get() {
+      return this._combat;
+    }
+  }]);
 
   return Stats;
 }();
@@ -229,30 +291,42 @@ exports.Avatar = Avatar;
 },{}],"class/Player.ts":[function(require,module,exports) {
 "use strict";
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Player = void 0;
 
-var Player =
-/** @class */
-function () {
+var Player = /*#__PURE__*/function () {
   function Player(name) {
+    _classCallCheck(this, Player);
+
     this.team = [];
-    this._profileImg = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw4RDQ0OEA0QDhANDQ0NDw4NDhsNDg0OFREWFxcTFRUYICggGBolGxMTITEhJSkrLi4uFx8zODMsNygtLisBCgoKDQ0NDg0NDisZFRkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAOYA2wMBIgACEQEDEQH/xAAaAAEAAwEBAQAAAAAAAAAAAAAAAQQFAwIH/8QAMhABAQABAQYEBAQGAwAAAAAAAAECEQMEEiFRkSIxQWEFcYGhQnKxwSMyUoLh8DNi0f/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A+qAKgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIebtMf6p3B7HObXH+qd49ygkQkAAAAAAAAAAAAAAAAAAAEWgjLKSa26SKe232/hn1v/jhvG3uV9vSfu5A9Z7TK+eVv1eNEiiNHrHKzytnyqAFnZb5lPPxT7r2y2kyxlmul6shY3Ta2Zaa8ulvJBpCEgAAAAAAAAAAAAAAAAK2/bSTCzXnfT10WMrpLb6c/oyNpncsrlfX7QHkBQAAAAdN2kueOt05uYDZSr7nteLDn5zlVhAAAAAAAAAAAAAAAABX37LTC+9mP+9mau/EbywnvapAAKAAAAAALPw/LxWdcf0aLL3O/wATH31n2aiAAAAAAAAAAAAAAADjvW14cdZ53lAVfiF8WP5f3VXrabS5XW3V5UAAAAAAAAdN3v8AEw/NGqxpdLrPTmv7nvFytmXPSayoLYAAAAAAAAAAAAACp8Qnhntl+y28bXCZY2X1BkD1tMLjdLNHlQAAAAAAAAWdwnjvtjVaRpbnseHHn53z9vZB3SAAAAAAAAAAAAACEgK2/wD/AB/3Ys5o7/PB/dGcAAoAAAAAAtfD74svy/u0FD4dj4sr6Sad19BCQAAAAAAAAAAAAAABz281wyn/AFrJbNjHzx0tnS6AgBQAAAAAkBf+Hzw29clpz3fDhwxl8/V1QAAAAAAAAAAAAAAAAFLf9l5ZSeXnp0XUWAxha2+52S2XWTW6XlZFVQAAAAWNy2VuUvpOf1eNhsLneknnWls8JjJJ5T7+6D0kAAAAAAAAAAAAAAQCRFrxdrjPxTuDoOGW94T8Wvyjllv2Ppjb9gd95vgy+TKd9tvWWUs0klcFAAAAF74deWU95+i4ydhtrjrppz6rOO/T1x7VBdFeb5h1s+ce8dvhfxQHUeZlOsv1egAAAAAAAAAU983jTwzz9b09gdNvvWOPL+a9J6fNT2m9Z3109pycQC29UaJFAAAAAAAAAAAAB0w2+c8sr8rzjmAvbHfZeWU0955f4W5WMsbrvHDdL/Lfsg0hCQAAAAc9vtOHG325fNk2+t875rvxDK+HGS9byU+G9L2BAnhvS9jhvS9lECeG9L2OG9L2BAnhvS9jhvS9gQJ4b0vY4b0vYECeG9L2OG9L2BAnhvS9jhvS9gQJ4b0vY4b0vYECeG9L2OG9L2BAnhvS9jhvS9gQJ4b0vY4b0vYF/cNrrjcb54/otMzdLcc5yvPleXVpoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/9k=";
+    this._profileImg = "Img/defaultavatar.jpg";
     this.name = name;
     this.money = 1000;
     this.victories = 0;
     this.defeats = 0;
   }
 
-  Object.defineProperty(Player.prototype, "profileImg", {
+  _createClass(Player, [{
+    key: "addMoney",
+    value: function addMoney(amount) {
+      this.money += amount;
+      return this.money;
+    }
+  }, {
+    key: "profileImg",
     get: function get() {
       return this._profileImg;
-    },
-    enumerable: false,
-    configurable: true
-  });
+    }
+  }]);
+
   return Player;
 }();
 
@@ -377,7 +451,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33899" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37393" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
