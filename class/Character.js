@@ -1,25 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Character = void 0;
-var Stats = /** @class */ (function () {
-    function Stats() {
-    }
-    return Stats;
-}());
-var Character = /** @class */ (function () {
-    function Character(id, name, stats, avatar) {
+class Character {
+    constructor(id, name, slug, stats, avatar) {
         this.id = id;
         this._name = name;
-        this.stats = stats;
+        this._slug = slug;
+        this._stats = stats;
         this.avatar = avatar;
     }
-    Object.defineProperty(Character.prototype, "name", {
-        get: function () {
-            return this._name;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return Character;
-}());
+    showPrice() {
+        return (this._stats.intelligence + this._stats.combat + this._stats.durability + this._stats.strength + this._stats.power + this._stats.speed) * 3;
+    }
+    get name() {
+        return this._name;
+    }
+    get slug() {
+        return this._slug;
+    }
+    get stats() {
+        return this._stats;
+    }
+}
 exports.Character = Character;

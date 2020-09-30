@@ -1,4 +1,4 @@
-import {key} from './Key';
+//import {key} from './Key';
 import {CharacterList} from "./class/CharacterList";
 import {Character} from "./class/Character";
 import {Stats} from "./class/Stats";
@@ -21,13 +21,14 @@ fetch(url)
             let avatar = new Avatar(entry.images.md);
             let powerStats = entry.powerstats;
             let stats = new Stats(powerStats.intelligence, powerStats.strength, powerStats.speed, powerStats.durability, powerStats.power, powerStats.combat); //entry.powerstats.intelligence etc
-            let hero = new Character(entry.id, entry.name, stats, avatar)
+            let hero = new Character(entry.id, entry.name, entry.slug, stats, avatar)
             characterList.add(hero)
             let option = document.createElement("option"); //'<option>${entry.name}</option>'
             option.innerText = hero.name;
+            option.value = hero.slug;
             dropdown.appendChild(option)
         })
-        console.log(characterList.search('A-Bomb'))
+        console.log(characterList.search('142-bumblebee').showPrice())
     });
 
 
@@ -48,6 +49,11 @@ showPlayerBtn.addEventListener('click', () => {
 })
 
 createPlayerBtn.addEventListener('click', () => {
-    let name = document.getElementById('player-name').value;
+    let name = (<HTMLInputElement>document.getElementById('player-name')).value;
     Game.setPlayer(name);
+})
+
+dropdown.addEventListener('change', () => {
+    let searchFor = (<HTMLInputElement>dropdown).value;
+    console.log(characterList.search(searchFor))
 })

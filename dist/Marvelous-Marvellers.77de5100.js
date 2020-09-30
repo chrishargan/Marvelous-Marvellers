@@ -290,7 +290,7 @@ exports.Game = Game;
 
 Object.defineProperty(exports, "__esModule", {
   value: true
-});
+}); //import {key} from './Key';
 
 var CharacterList_1 = require("./class/CharacterList");
 
@@ -317,14 +317,15 @@ fetch(url).then(function (response) {
     var powerStats = entry.powerstats;
     var stats = new Stats_1.Stats(powerStats.intelligence, powerStats.strength, powerStats.speed, powerStats.durability, powerStats.power, powerStats.combat); //entry.powerstats.intelligence etc
 
-    var hero = new Character_1.Character(entry.id, entry.name, stats, avatar);
+    var hero = new Character_1.Character(entry.id, entry.name, entry.slug, stats, avatar);
     characterList.add(hero);
     var option = document.createElement("option"); //'<option>${entry.name}</option>'
 
     option.innerText = hero.name;
+    option.value = hero.slug;
     dropdown.appendChild(option);
   });
-  console.log(characterList.search('A-Bomb'));
+  console.log(characterList.search('142-bumblebee').showPrice());
 });
 var player = JSON.parse(localStorage.getItem('player'));
 
@@ -343,6 +344,10 @@ showPlayerBtn.addEventListener('click', function () {
 createPlayerBtn.addEventListener('click', function () {
   var name = document.getElementById('player-name').value;
   Game_1.Game.setPlayer(name);
+});
+dropdown.addEventListener('change', function () {
+  var searchFor = dropdown.value;
+  console.log(characterList.search(searchFor));
 });
 },{"./class/CharacterList":"class/CharacterList.ts","./class/Character":"class/Character.ts","./class/Stats":"class/Stats.ts","./class/Avatar":"class/Avatar.ts","./class/Game":"class/Game.ts"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

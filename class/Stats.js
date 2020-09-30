@@ -1,15 +1,32 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Stats = void 0;
-var Stats = /** @class */ (function () {
-    function Stats(intelligence, strength, speed, durability, power, combat) {
-        this.intelligence = intelligence;
-        this.strength = strength;
-        this.speed = speed;
-        this.durability = durability;
-        this.power = power;
-        this.combat = combat;
+class Stats {
+    constructor(intelligence, strength, speed, durability, power, combat) {
+        this._intelligence = intelligence;
+        this._strength = strength;
+        this._speed = speed;
+        this._durability = durability;
+        this._power = power;
+        this._combat = combat;
     }
-    return Stats;
-}());
+    get intelligence() {
+        return this._intelligence;
+    }
+    get strength() {
+        return this._strength;
+    }
+    get speed() {
+        return this._speed;
+    }
+    get durability() {
+        return this._durability;
+    }
+    get power() {
+        return this._power;
+    }
+    get combat() {
+        return this._combat;
+    }
+}
 exports.Stats = Stats;
