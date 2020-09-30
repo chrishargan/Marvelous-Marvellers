@@ -35,7 +35,12 @@ fetch(url)
 let player = JSON.parse(localStorage.getItem('player'));
 
 if(player){
-    (document.getElementById('profile-picture')).src = player.profileImg; // <HTMLImageElement>
+    console.log(player)
+    console.log(player.profileImg)
+    document.getElementById('player-header').style.display = "block";
+    /*const img = document.getElementById('profile-picture')
+    console.log(img)//.src = player.profileImg; // <HTMLImageElement>
+    img.setAttribute('src', player.profileImg);*/
 }
 
 showPlayerBtn.addEventListener('click', () => {
