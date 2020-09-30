@@ -1,6 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: grid;
+    place-items: center;
+    width: 95%;
+    background-color: red;
+}
+
+
 #player-window {
     display: none;
 }
+
 #player-header {
     display: none;
+}
+
+#profile-picture {
+    width: 75px;
+    border-radius: 50%;
+}
+
+#money {
+    color: greenyellow;
 }
