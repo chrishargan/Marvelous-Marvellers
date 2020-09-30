@@ -117,229 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"class/CharacterList.ts":[function(require,module,exports) {
-"use strict";
+})({"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.CharacterList = void 0;
-
-var CharacterList =
-/** @class */
-function () {
-  function CharacterList() {
-    this.map = new Map();
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
 
-  CharacterList.prototype.add = function (hero) {
-    this.map.set(hero.name, hero);
-  };
-
-  CharacterList.prototype.search = function (name) {
-    if (this.map.has(name)) {
-      return this.map.get(name);
-    } else return null;
-  };
-
-  return CharacterList;
-}();
-
-exports.CharacterList = CharacterList;
-},{}],"class/Character.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Character = void 0;
-
-var Stats =
-/** @class */
-function () {
-  function Stats() {}
-
-  return Stats;
-}();
-
-var Character =
-/** @class */
-function () {
-  function Character(id, name, stats, avatar) {
-    this.id = id;
-    this._name = name;
-    this.stats = stats;
-    this.avatar = avatar;
-  }
-
-  Object.defineProperty(Character.prototype, "name", {
-    get: function get() {
-      return this._name;
-    },
-    enumerable: false,
-    configurable: true
-  });
-  return Character;
-}();
-
-exports.Character = Character;
-},{}],"class/Stats.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Stats = void 0;
-
-var Stats =
-/** @class */
-function () {
-  function Stats(intelligence, strength, speed, durability, power, combat) {
-    this.intelligence = intelligence;
-    this.strength = strength;
-    this.speed = speed;
-    this.durability = durability;
-    this.power = power;
-    this.combat = combat;
-  }
-
-  return Stats;
-}();
-
-exports.Stats = Stats;
-},{}],"class/Avatar.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Avatar = void 0;
-
-var Avatar =
-/** @class */
-function () {
-  function Avatar(portrait) {
-    this.portrait = portrait;
-  }
-
-  return Avatar;
-}();
-
-exports.Avatar = Avatar;
-},{}],"class/Player.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Player = void 0;
-
-var Player =
-/** @class */
-function () {
-  function Player(name) {
-    this.team = [];
-    this._profileImg = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw4RDQ0OEA0QDhANDQ0NDw4NDhsNDg0OFREWFxcTFRUYICggGBolGxMTITEhJSkrLi4uFx8zODMsNygtLisBCgoKDQ0NDg0NDisZFRkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAOYA2wMBIgACEQEDEQH/xAAaAAEAAwEBAQAAAAAAAAAAAAAAAQQFAwIH/8QAMhABAQABAQYEBAQGAwAAAAAAAAECEQMEEiFRkSIxQWEFcYGhQnKxwSMyUoLh8DNi0f/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A+qAKgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIebtMf6p3B7HObXH+qd49ygkQkAAAAAAAAAAAAAAAAAAAEWgjLKSa26SKe232/hn1v/jhvG3uV9vSfu5A9Z7TK+eVv1eNEiiNHrHKzytnyqAFnZb5lPPxT7r2y2kyxlmul6shY3Ta2Zaa8ulvJBpCEgAAAAAAAAAAAAAAAAK2/bSTCzXnfT10WMrpLb6c/oyNpncsrlfX7QHkBQAAAAdN2kueOt05uYDZSr7nteLDn5zlVhAAAAAAAAAAAAAAAABX37LTC+9mP+9mau/EbywnvapAAKAAAAAALPw/LxWdcf0aLL3O/wATH31n2aiAAAAAAAAAAAAAAADjvW14cdZ53lAVfiF8WP5f3VXrabS5XW3V5UAAAAAAAAdN3v8AEw/NGqxpdLrPTmv7nvFytmXPSayoLYAAAAAAAAAAAAACp8Qnhntl+y28bXCZY2X1BkD1tMLjdLNHlQAAAAAAAAWdwnjvtjVaRpbnseHHn53z9vZB3SAAAAAAAAAAAAACEgK2/wD/AB/3Ys5o7/PB/dGcAAoAAAAAAtfD74svy/u0FD4dj4sr6Sad19BCQAAAAAAAAAAAAAABz281wyn/AFrJbNjHzx0tnS6AgBQAAAAAkBf+Hzw29clpz3fDhwxl8/V1QAAAAAAAAAAAAAAAAFLf9l5ZSeXnp0XUWAxha2+52S2XWTW6XlZFVQAAAAWNy2VuUvpOf1eNhsLneknnWls8JjJJ5T7+6D0kAAAAAAAAAAAAAAQCRFrxdrjPxTuDoOGW94T8Wvyjllv2Ppjb9gd95vgy+TKd9tvWWUs0klcFAAAAF74deWU95+i4ydhtrjrppz6rOO/T1x7VBdFeb5h1s+ce8dvhfxQHUeZlOsv1egAAAAAAAAAU983jTwzz9b09gdNvvWOPL+a9J6fNT2m9Z3109pycQC29UaJFAAAAAAAAAAAAB0w2+c8sr8rzjmAvbHfZeWU0955f4W5WMsbrvHDdL/Lfsg0hCQAAAAc9vtOHG325fNk2+t875rvxDK+HGS9byU+G9L2BAnhvS9jhvS9lECeG9L2OG9L2BAnhvS9jhvS9gQJ4b0vY4b0vYECeG9L2OG9L2BAnhvS9jhvS9gQJ4b0vY4b0vYECeG9L2OG9L2BAnhvS9jhvS9gQJ4b0vY4b0vYF/cNrrjcb54/otMzdLcc5yvPleXVpoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/9k=";
-    this.name = name;
-    this.money = 1000;
-    this.victories = 0;
-    this.defeats = 0;
-  }
-
-  Object.defineProperty(Player.prototype, "profileImg", {
-    get: function get() {
-      return this._profileImg;
-    },
-    enumerable: false,
-    configurable: true
-  });
-  return Player;
-}();
-
-exports.Player = Player;
-},{}],"class/Game.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Game = void 0;
-
-var Player_1 = require("./Player");
-
-var Game =
-/** @class */
-function () {
-  function Game() {}
-
-  Game.showPlayerCreationWindow = function () {
-    document.getElementById('player-window').style.display = "block";
-  };
-
-  Game.setPlayer = function (name) {
-    var player = new Player_1.Player(name);
-    localStorage.setItem('player', JSON.stringify(player));
-  };
-
-  return Game;
-}();
-
-exports.Game = Game;
-},{"./Player":"class/Player.ts"}],"index.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var CharacterList_1 = require("./class/CharacterList");
-
-var Character_1 = require("./class/Character");
-
-var Stats_1 = require("./class/Stats");
-
-var Avatar_1 = require("./class/Avatar");
-
-var Game_1 = require("./class/Game"); //let url = 'http://superheroapi.com/api.php/' + key + '/1';
-
-
-var url = 'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json';
-console.log(url);
-var dropdown = document.getElementById('characters');
-var showPlayerBtn = document.getElementById('open-player');
-var createPlayerBtn = document.getElementById('create-player');
-var characterList = new CharacterList_1.CharacterList();
-fetch(url).then(function (response) {
-  return response.json();
-}).then(function (data) {
-  data.forEach(function (entry) {
-    var avatar = new Avatar_1.Avatar(entry.images.md);
-    var powerStats = entry.powerstats;
-    var stats = new Stats_1.Stats(powerStats.intelligence, powerStats.strength, powerStats.speed, powerStats.durability, powerStats.power, powerStats.combat); //entry.powerstats.intelligence etc
-
-    var hero = new Character_1.Character(entry.id, entry.name, stats, avatar);
-    characterList.add(hero);
-    var option = document.createElement("option"); //'<option>${entry.name}</option>'
-
-    option.innerText = hero.name;
-    dropdown.appendChild(option);
-  });
-  console.log(characterList.search('A-Bomb'));
-});
-var player = JSON.parse(localStorage.getItem('player'));
-
-if (player) {
-  document.getElementById('profile-picture').src = player.profileImg; // <HTMLImageElement>
+  return bundleURL;
 }
 
-showPlayerBtn.addEventListener('click', function () {
-  Game_1.Game.showPlayerCreationWindow();
-});
-createPlayerBtn.addEventListener('click', function () {
-  var name = document.getElementById('player-name').value;
-  Game_1.Game.setPlayer(name);
-});
-},{"./class/CharacterList":"class/CharacterList.ts","./class/Character":"class/Character.ts","./class/Stats":"class/Stats.ts","./class/Avatar":"class/Avatar.ts","./class/Game":"class/Game.ts"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"css/style.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -543,5 +393,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.ts"], null)
-//# sourceMappingURL=/Marvelous-Marvellers.77de5100.js.map
+},{}]},{},["../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/style.78032849.js.map

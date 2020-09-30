@@ -20,5 +20,6 @@
   "dependencies": {
     "md5": "^2.3.0",
     "md5-typescript": "^1.0.5"
-  }
+  },
+  "devDependencies": {}
 }
