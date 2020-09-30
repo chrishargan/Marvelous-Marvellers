@@ -8,9 +8,9 @@ class CharacterList {
         this.map = new Map();
     }
     public add(hero : Character) : void {
-        this.map.set(hero.name, hero);
+        this.map.set(hero.slug, hero);
     }
-    public search(name : string) : Character | null {
+    public search(name : string) : Character | undefined | null {
         if(this.map.has(name)){
             return this.map.get(name)
         } else return null

@@ -19,6 +19,12 @@ class Player {
     get profileImg(): string {
         return this._profileImg;
     }
+
+    public addMoney(amount: number): number{
+        this.money += amount;
+        return this.money;
+    }
+
 }
 
 export {Player}

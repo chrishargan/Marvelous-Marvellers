@@ -120,27 +120,37 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"class/CharacterList.ts":[function(require,module,exports) {
 "use strict";
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.CharacterList = void 0;
 
-var CharacterList =
-/** @class */
-function () {
+var CharacterList = /*#__PURE__*/function () {
   function CharacterList() {
+    _classCallCheck(this, CharacterList);
+
     this.map = new Map();
   }
 
-  CharacterList.prototype.add = function (hero) {
-    this.map.set(hero.name, hero);
-  };
-
-  CharacterList.prototype.search = function (name) {
-    if (this.map.has(name)) {
-      return this.map.get(name);
-    } else return null;
-  };
+  _createClass(CharacterList, [{
+    key: "add",
+    value: function add(hero) {
+      this.map.set(hero.slug, hero);
+    }
+  }, {
+    key: "search",
+    value: function search(name) {
+      if (this.map.has(name)) {
+        return this.map.get(name);
+      } else return null;
+    }
+  }]);
 
   return CharacterList;
 }();
@@ -154,27 +164,38 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Character = void 0;
 
-var Stats =
-/** @class */
-function () {
-  function Stats() {}
-
-  return Stats;
-}();
-
 var Character =
 /** @class */
 function () {
-  function Character(id, name, stats, avatar) {
+  function Character(id, name, slug, stats, avatar) {
     this.id = id;
     this._name = name;
-    this.stats = stats;
+    this._slug = slug;
+    this._stats = stats;
     this.avatar = avatar;
   }
+
+  Character.prototype.showPrice = function () {
+    return (this._stats.intelligence + this._stats.combat + this._stats.durability + this._stats.strength + this._stats.power + this._stats.speed) * 3;
+  };
 
   Object.defineProperty(Character.prototype, "name", {
     get: function get() {
       return this._name;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Character.prototype, "slug", {
+    get: function get() {
+      return this._slug;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Character.prototype, "stats", {
+    get: function get() {
+      return this._stats;
     },
     enumerable: false,
     configurable: true
@@ -195,14 +216,56 @@ var Stats =
 /** @class */
 function () {
   function Stats(intelligence, strength, speed, durability, power, combat) {
-    this.intelligence = intelligence;
-    this.strength = strength;
-    this.speed = speed;
-    this.durability = durability;
-    this.power = power;
-    this.combat = combat;
+    this._intelligence = intelligence;
+    this._strength = strength;
+    this._speed = speed;
+    this._durability = durability;
+    this._power = power;
+    this._combat = combat;
   }
 
+  Object.defineProperty(Stats.prototype, "intelligence", {
+    get: function get() {
+      return this._intelligence;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Stats.prototype, "strength", {
+    get: function get() {
+      return this._strength;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Stats.prototype, "speed", {
+    get: function get() {
+      return this._speed;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Stats.prototype, "durability", {
+    get: function get() {
+      return this._durability;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Stats.prototype, "power", {
+    get: function get() {
+      return this._power;
+    },
+    enumerable: false,
+    configurable: true
+  });
+  Object.defineProperty(Stats.prototype, "combat", {
+    get: function get() {
+      return this._combat;
+    },
+    enumerable: false,
+    configurable: true
+  });
   return Stats;
 }();
 
@@ -239,7 +302,7 @@ var Player =
 function () {
   function Player(name) {
     this.team = [];
-    this._profileImg = "Img/defaultavatar.jpg";
+    this._profileImg = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw4RDQ0OEA0QDhANDQ0NDw4NDhsNDg0OFREWFxcTFRUYICggGBolGxMTITEhJSkrLi4uFx8zODMsNygtLisBCgoKDQ0NDg0NDisZFRkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAOYA2wMBIgACEQEDEQH/xAAaAAEAAwEBAQAAAAAAAAAAAAAAAQQFAwIH/8QAMhABAQABAQYEBAQGAwAAAAAAAAECEQMEEiFRkSIxQWEFcYGhQnKxwSMyUoLh8DNi0f/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A+qAKgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIebtMf6p3B7HObXH+qd49ygkQkAAAAAAAAAAAAAAAAAAAEWgjLKSa26SKe232/hn1v/jhvG3uV9vSfu5A9Z7TK+eVv1eNEiiNHrHKzytnyqAFnZb5lPPxT7r2y2kyxlmul6shY3Ta2Zaa8ulvJBpCEgAAAAAAAAAAAAAAAAK2/bSTCzXnfT10WMrpLb6c/oyNpncsrlfX7QHkBQAAAAdN2kueOt05uYDZSr7nteLDn5zlVhAAAAAAAAAAAAAAAABX37LTC+9mP+9mau/EbywnvapAAKAAAAAALPw/LxWdcf0aLL3O/wATH31n2aiAAAAAAAAAAAAAAADjvW14cdZ53lAVfiF8WP5f3VXrabS5XW3V5UAAAAAAAAdN3v8AEw/NGqxpdLrPTmv7nvFytmXPSayoLYAAAAAAAAAAAAACp8Qnhntl+y28bXCZY2X1BkD1tMLjdLNHlQAAAAAAAAWdwnjvtjVaRpbnseHHn53z9vZB3SAAAAAAAAAAAAACEgK2/wD/AB/3Ys5o7/PB/dGcAAoAAAAAAtfD74svy/u0FD4dj4sr6Sad19BCQAAAAAAAAAAAAAABz281wyn/AFrJbNjHzx0tnS6AgBQAAAAAkBf+Hzw29clpz3fDhwxl8/V1QAAAAAAAAAAAAAAAAFLf9l5ZSeXnp0XUWAxha2+52S2XWTW6XlZFVQAAAAWNy2VuUvpOf1eNhsLneknnWls8JjJJ5T7+6D0kAAAAAAAAAAAAAAQCRFrxdrjPxTuDoOGW94T8Wvyjllv2Ppjb9gd95vgy+TKd9tvWWUs0klcFAAAAF74deWU95+i4ydhtrjrppz6rOO/T1x7VBdFeb5h1s+ce8dvhfxQHUeZlOsv1egAAAAAAAAAU983jTwzz9b09gdNvvWOPL+a9J6fNT2m9Z3109pycQC29UaJFAAAAAAAAAAAAB0w2+c8sr8rzjmAvbHfZeWU0955f4W5WMsbrvHDdL/Lfsg0hCQAAAAc9vtOHG325fNk2+t875rvxDK+HGS9byU+G9L2BAnhvS9jhvS9lECeG9L2OG9L2BAnhvS9jhvS9gQJ4b0vY4b0vYECeG9L2OG9L2BAnhvS9jhvS9gQJ4b0vY4b0vYECeG9L2OG9L2BAnhvS9jhvS9gQJ4b0vY4b0vYF/cNrrjcb54/otMzdLcc5yvPleXVpoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/9k=";
     this.name = name;
     this.money = 1000;
     this.victories = 0;
@@ -290,7 +353,7 @@ exports.Game = Game;
 
 Object.defineProperty(exports, "__esModule", {
   value: true
-});
+}); //import {key} from './Key';
 
 var CharacterList_1 = require("./class/CharacterList");
 
@@ -317,14 +380,15 @@ fetch(url).then(function (response) {
     var powerStats = entry.powerstats;
     var stats = new Stats_1.Stats(powerStats.intelligence, powerStats.strength, powerStats.speed, powerStats.durability, powerStats.power, powerStats.combat); //entry.powerstats.intelligence etc
 
-    var hero = new Character_1.Character(entry.id, entry.name, stats, avatar);
+    var hero = new Character_1.Character(entry.id, entry.name, entry.slug, stats, avatar);
     characterList.add(hero);
     var option = document.createElement("option"); //'<option>${entry.name}</option>'
 
     option.innerText = hero.name;
+    option.value = hero.slug;
     dropdown.appendChild(option);
   });
-  console.log(characterList.search('A-Bomb'));
+  console.log(characterList.search('142-bumblebee').showPrice());
 });
 var player = JSON.parse(localStorage.getItem('player'));
 
@@ -343,6 +407,10 @@ showPlayerBtn.addEventListener('click', function () {
 createPlayerBtn.addEventListener('click', function () {
   var name = document.getElementById('player-name').value;
   Game_1.Game.setPlayer(name);
+});
+dropdown.addEventListener('change', function () {
+  var searchFor = dropdown.value;
+  console.log(characterList.search(searchFor));
 });
 },{"./class/CharacterList":"class/CharacterList.ts","./class/Character":"class/Character.ts","./class/Stats":"class/Stats.ts","./class/Avatar":"class/Avatar.ts","./class/Game":"class/Game.ts"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

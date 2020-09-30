@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Player = void 0;
-var Player = /** @class */ (function () {
-    function Player(name) {
+class Player {
+    constructor(name) {
         this.team = [];
         this._profileImg = "Img/defaultavatar.jpg";
         this.name = name;
@@ -10,13 +10,12 @@ var Player = /** @class */ (function () {
         this.victories = 0;
         this.defeats = 0;
     }
-    Object.defineProperty(Player.prototype, "profileImg", {
-        get: function () {
-            return this._profileImg;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return Player;
-}());
+    get profileImg() {
+        return this._profileImg;
+    }
+    addMoney(amount) {
+        this.money += amount;
+        return this.money;
+    }
+}
 exports.Player = Player;
