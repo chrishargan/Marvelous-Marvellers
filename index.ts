@@ -9,9 +9,9 @@ import {Game} from "./class/Game";
 //let url = 'http://superheroapi.com/api.php/' + key + '/1';
 let url = 'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json';
 console.log(url);
-const dropdown = document.getElementById('characters')
-const showPlayerBtn = document.getElementById('open-player')
-const createPlayerBtn = document.getElementById('create-player');
+const dropdown = (<HTMLElement>document.getElementById('characters'));
+const showPlayerBtn = <HTMLButtonElement>document.getElementById('open-player')
+const createPlayerBtn = <HTMLButtonElement>document.getElementById('create-player');
 
 let characterList = new CharacterList();
 fetch(url)
@@ -28,17 +28,17 @@ fetch(url)
             option.value = hero.slug;
             dropdown.appendChild(option)
         })
-        console.log(characterList.search('142-bumblebee').showPrice())
     });
 
 
 
-let player = JSON.parse(localStorage.getItem('player'));
+let player = JSON.parse(<string>localStorage.getItem('player'));
 
 if(player){
-    console.log(player)
-    console.log(player.profileImg)
-    document.getElementById('player-header').style.display = "block";
+    console.log(player);
+    console.log(player.profileImg);
+    (<HTMLElement>document.getElementById('player-header')).style.display = "block";
+    //<HTMLElement>document.getElementById("player-header")
     /*const img = document.getElementById('profile-picture')
     console.log(img)//.src = player.profileImg; // <HTMLImageElement>
     img.setAttribute('src', player.profileImg);*/

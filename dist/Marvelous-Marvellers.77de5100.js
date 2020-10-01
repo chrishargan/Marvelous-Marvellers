@@ -399,14 +399,14 @@ fetch(url).then(function (response) {
     option.value = hero.slug;
     dropdown.appendChild(option);
   });
-  console.log(characterList.search('142-bumblebee').showPrice());
 });
 var player = JSON.parse(localStorage.getItem('player'));
 
 if (player) {
   console.log(player);
   console.log(player.profileImg);
-  document.getElementById('player-header').style.display = "block";
+  document.getElementById('player-header').style.display = "block"; //<HTMLElement>document.getElementById("player-header")
+
   /*const img = document.getElementById('profile-picture')
   console.log(img)//.src = player.profileImg; // <HTMLImageElement>
   img.setAttribute('src', player.profileImg);*/
@@ -451,7 +451,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37393" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37003" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
