@@ -10,23 +10,44 @@
     Welcome <span id="player_name">Guest</span>!
     <div id="player-header">
         <img src="Img/defaultavatar.jpg" id="profile-picture" alt="Player Avatar">
-        <div id="money">Credits: {0}</div>
-        <div id="battle-results">Score: {0-0}</div>
+        <div id="money">Credits: <span id="player-money"></span></div>
+        <div id="battle-results">Score: Wins: <span id="player-wins"></span> - Losses: <span id="player-losses"></span></div>
     </div>
 </header>
-<label for="characters">Choose Character</label><select name="characters" id="characters">
+<main>
+    <label for="characters">Choose Character </label>
+    <select name="characters" id="characters">
     <option value="" selected disabled hidden>Choose here</option>
-</select>
+    </select>
 
-<button id="open-player">Account</button>
+    <button id="open-player">Show Player Info</button>
 
-<div id="player-window">
-    <label>Player Name
-        <input type="text" id="player-name">
-    </label>
-    <button id="create-player">Create Player</button>
-</div>
+    <section id="player-window">
+        <label>Player Name
+            <input type="text" id="player-name">
+        </label>
+        <button id="create-player">Create Player</button>
+    </section>
 
+    <section id="character-info">
+        <h2 id="character-name"></h2>
+        <hr>
+        <ul>
+            <li id="character-power"></li>
+            <li id="character-strength"></li>
+            <li id="character-speed"></li>
+            <li id="character-intelligence"></li>
+            <li id="character-combat"></li>
+            <li id="character-durability"></li>
+        </ul>
+        <br>
+        <h4 id="character-price"></h4>
+        <button id="buy-character">Buy</button>
+        <p id="message"></p>
+    </section>
+</main>
+
+<footer></footer>
 <script src="node_modules/md5/md5.js"></script>
 <script src="index.ts"></script>
 </body>

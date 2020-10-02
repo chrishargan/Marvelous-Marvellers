@@ -1,10 +1,11 @@
 //import {key} from './Key';
+import {Player} from "./class/Player";
 import {CharacterList} from "./class/CharacterList";
 import {Character} from "./class/Character";
 import {Stats} from "./class/Stats";
 import {Avatar} from "./class/Avatar";
-import {Player} from "./class/Player";
 import {Game} from "./class/Game";
+import {Page} from "./class/Page";
 
 //let url = 'http://superheroapi.com/api.php/' + key + '/1';
 let url = 'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json';
@@ -12,6 +13,7 @@ console.log(url);
 const dropdown = (<HTMLElement>document.getElementById('characters'));
 const showPlayerBtn = <HTMLButtonElement>document.getElementById('open-player')
 const createPlayerBtn = <HTMLButtonElement>document.getElementById('create-player');
+const buyBtn = (<HTMLElement>document.getElementById('buy-character'));
 
 let characterList = new CharacterList();
 fetch(url)
@@ -30,22 +32,26 @@ fetch(url)
         })
     });
 
+(<HTMLElement>document.getElementById('character-info')).style.display = "none";
 
 
 let player = JSON.parse(<string>localStorage.getItem('player'));
 
+if(!player) console.log("no player")
+
 if(player){
     console.log(player);
-    console.log(player.profileImg);
-    (<HTMLElement>document.getElementById('player-header')).style.display = "block";
-    //<HTMLElement>document.getElementById("player-header")
-    /*const img = document.getElementById('profile-picture')
-    console.log(img)//.src = player.profileImg; // <HTMLImageElement>
-    img.setAttribute('src', player.profileImg);*/
+    console.log(player._name);
+    let team : Map<string, Character> = new Map(Object.entries(player._team));
+    Game.player = new Player(player._name, player._money, player._victories, player._defeats, team);
+    Page.showElementById('player-header');
+    Page.showPlayerInfo(Game.player);
+
 }
 
 showPlayerBtn.addEventListener('click', () => {
-    Game.showPlayerCreationWindow();
+    //Game.showPlayerCreationWindow();
+    Page.showElementById('player-window');
 })
 
 createPlayerBtn.addEventListener('click', () => {
@@ -55,5 +61,25 @@ createPlayerBtn.addEventListener('click', () => {
 
 dropdown.addEventListener('change', () => {
     let searchFor = (<HTMLInputElement>dropdown).value;
-    console.log(characterList.search(searchFor))
+    console.log(characterList.search(searchFor));
+    Page.showAllStats(<Character>characterList.search(searchFor));
+})
+
+buyBtn.addEventListener('click', (e) => {
+
+    if(!Game.player) return;
+    let search = (<HTMLButtonElement>e.target).dataset.character;
+    let character = characterList.search(<string>search);
+    /*let outcomeMsg: string = Game.player.handleBuying(<Character>character);
+    (<HTMLElement>document.getElementById('message')).innerText = outcomeMsg;*/
+    console.log(character)
+    console.log(Game.player)
+    Game.player.addMoney(100)
+    Game.player.handleBuying(<Character>character);
+})
+
+window.addEventListener("beforeunload", () => {
+    if(Game.player){
+        localStorage.setItem("player", JSON.stringify(Game.player));
+    }
 })

@@ -117,7 +117,95 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"class/CharacterList.ts":[function(require,module,exports) {
+})({"class/Player.ts":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Player = void 0;
+
+var Player = /*#__PURE__*/function () {
+  function Player(name, money, victories, defeats, team) {
+    _classCallCheck(this, Player);
+
+    this._profileImg = "Img/defaultavatar.jpg";
+    console.log(team);
+    this._name = name;
+    this._money = money;
+    this._victories = victories;
+    this._defeats = defeats;
+    this._team = team;
+  }
+
+  _createClass(Player, [{
+    key: "addMoney",
+    value: function addMoney(amount) {
+      this._money += amount;
+      return this._money;
+    }
+  }, {
+    key: "substractMoney",
+    value: function substractMoney(amount) {
+      this._money -= amount;
+      return this._money;
+    }
+  }, {
+    key: "addToTeam",
+    value: function addToTeam(character) {
+      this.team.set(character.slug, character);
+    }
+  }, {
+    key: "handleBuying",
+    value: function handleBuying(character) {
+      if (this.team.has(character.slug)) return "You already have this character in your team!";
+      if (character.showPrice() > this.money) return "You don't have enough money to buy this character!";
+      this.addToTeam(character);
+      return "Congratulations! You just bought " + character.name + "!";
+    }
+  }, {
+    key: "name",
+    get: function get() {
+      return this._name;
+    }
+  }, {
+    key: "money",
+    get: function get() {
+      return this._money;
+    }
+  }, {
+    key: "victories",
+    get: function get() {
+      return this._victories;
+    }
+  }, {
+    key: "defeats",
+    get: function get() {
+      return this._defeats;
+    }
+  }, {
+    key: "profileImg",
+    get: function get() {
+      return this._profileImg;
+    }
+  }, {
+    key: "team",
+    get: function get() {
+      return this._team;
+    }
+  }]);
+
+  return Player;
+}();
+
+exports.Player = Player;
+},{}],"class/CharacterList.ts":[function(require,module,exports) {
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -288,7 +376,7 @@ function () {
 }();
 
 exports.Avatar = Avatar;
-},{}],"class/Player.ts":[function(require,module,exports) {
+},{}],"class/Page.ts":[function(require,module,exports) {
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -300,39 +388,64 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Player = void 0;
+exports.Page = void 0;
 
-var Player = /*#__PURE__*/function () {
-  function Player(name) {
-    _classCallCheck(this, Player);
-
-    this.team = [];
-    this._profileImg = "Img/defaultavatar.jpg";
-    this.name = name;
-    this.money = 1000;
-    this.victories = 0;
-    this.defeats = 0;
+var Page = /*#__PURE__*/function () {
+  function Page() {
+    _classCallCheck(this, Page);
   }
 
-  _createClass(Player, [{
-    key: "addMoney",
-    value: function addMoney(amount) {
-      this.money += amount;
-      return this.money;
+  _createClass(Page, null, [{
+    key: "showElementById",
+    value: function showElementById(id) {
+      document.getElementById(id).style.display = "block";
     }
   }, {
-    key: "profileImg",
-    get: function get() {
-      return this._profileImg;
+    key: "hideElementById",
+    value: function hideElementById(id) {
+      document.getElementById(id).style.display = "none";
+    }
+  }, {
+    key: "showPlayerInfo",
+    value: function showPlayerInfo(player) {
+      document.getElementById("player_name").innerText = player.name;
+      document.getElementById("player-losses").innerText = String(player.defeats);
+      document.getElementById("player-wins").innerText = String(player.victories);
+      document.getElementById("player-money").innerText = String(player.money);
+    }
+  }, {
+    key: "showCharacterStat",
+    value: function showCharacterStat(id, description, stat) {
+      document.getElementById(id).innerText = description + stat;
+    }
+  }, {
+    key: "showAllStats",
+    value: function showAllStats(character) {
+      this.showElementById('character-info');
+      document.getElementById('character-name').innerText = character.name;
+      document.getElementById('character-price').innerText = "Price: $" + character.showPrice();
+      document.getElementById('buy-character').dataset.character = character.slug;
+      this.showCharacterStat('character-intelligence', 'Intelligence: ', character.stats.intelligence);
+      this.showCharacterStat('character-speed', 'Speed: ', character.stats.speed);
+      this.showCharacterStat('character-combat', 'Combat: ', character.stats.combat);
+      this.showCharacterStat('character-strength', 'Strength: ', character.stats.strength);
+      this.showCharacterStat('character-power', 'Power: ', character.stats.power);
+      this.showCharacterStat('character-durability', 'Durability: ', character.stats.durability);
     }
   }]);
 
-  return Player;
+  return Page;
 }();
 
-exports.Player = Player;
+exports.Page = Page;
 },{}],"class/Game.ts":[function(require,module,exports) {
 "use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -341,30 +454,49 @@ exports.Game = void 0;
 
 var Player_1 = require("./Player");
 
-var Game =
-/** @class */
-function () {
-  function Game() {}
+var Page_1 = require("./Page");
 
-  Game.showPlayerCreationWindow = function () {
-    document.getElementById('player-window').style.display = "block";
-  };
+var Game = /*#__PURE__*/function () {
+  function Game() {
+    _classCallCheck(this, Game);
+  }
 
-  Game.setPlayer = function (name) {
-    var player = new Player_1.Player(name);
-    localStorage.setItem('player', JSON.stringify(player));
-  };
+  _createClass(Game, null, [{
+    key: "setPlayer",
+    value: function setPlayer(name) {
+      var player = new Player_1.Player(name, 1000, 0, 0, new Map()); //localStorage.setItem('player', JSON.stringify(player));
+
+      this._player = player;
+      Page_1.Page.showPlayerInfo(player);
+      Page_1.Page.showElementById('player-header');
+    }
+  }, {
+    key: "player",
+    get: function get() {
+      return this._player;
+    },
+    set: function set(value) {
+      this._player = value; //localStorage.setItem('player', JSON.stringify(value));
+
+      if (value) {
+        Page_1.Page.showPlayerInfo(value);
+        Page_1.Page.showElementById('player-header');
+      }
+    }
+  }]);
 
   return Game;
 }();
 
 exports.Game = Game;
-},{"./Player":"class/Player.ts"}],"index.ts":[function(require,module,exports) {
+},{"./Player":"class/Player.ts","./Page":"class/Page.ts"}],"index.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 }); //import {key} from './Key';
+
+var Player_1 = require("./class/Player");
 
 var CharacterList_1 = require("./class/CharacterList");
 
@@ -374,7 +506,9 @@ var Stats_1 = require("./class/Stats");
 
 var Avatar_1 = require("./class/Avatar");
 
-var Game_1 = require("./class/Game"); //let url = 'http://superheroapi.com/api.php/' + key + '/1';
+var Game_1 = require("./class/Game");
+
+var Page_1 = require("./class/Page"); //let url = 'http://superheroapi.com/api.php/' + key + '/1';
 
 
 var url = 'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json';
@@ -382,6 +516,7 @@ console.log(url);
 var dropdown = document.getElementById('characters');
 var showPlayerBtn = document.getElementById('open-player');
 var createPlayerBtn = document.getElementById('create-player');
+var buyBtn = document.getElementById('buy-character');
 var characterList = new CharacterList_1.CharacterList();
 fetch(url).then(function (response) {
   return response.json();
@@ -400,20 +535,22 @@ fetch(url).then(function (response) {
     dropdown.appendChild(option);
   });
 });
+document.getElementById('character-info').style.display = "none";
 var player = JSON.parse(localStorage.getItem('player'));
+if (!player) console.log("no player");
 
 if (player) {
   console.log(player);
-  console.log(player.profileImg);
-  document.getElementById('player-header').style.display = "block"; //<HTMLElement>document.getElementById("player-header")
-
-  /*const img = document.getElementById('profile-picture')
-  console.log(img)//.src = player.profileImg; // <HTMLImageElement>
-  img.setAttribute('src', player.profileImg);*/
+  console.log(player._name);
+  var team = new Map(Object.entries(player._team));
+  Game_1.Game.player = new Player_1.Player(player._name, player._money, player._victories, player._defeats, team);
+  Page_1.Page.showElementById('player-header');
+  Page_1.Page.showPlayerInfo(Game_1.Game.player);
 }
 
 showPlayerBtn.addEventListener('click', function () {
-  Game_1.Game.showPlayerCreationWindow();
+  //Game.showPlayerCreationWindow();
+  Page_1.Page.showElementById('player-window');
 });
 createPlayerBtn.addEventListener('click', function () {
   var name = document.getElementById('player-name').value;
@@ -422,8 +559,26 @@ createPlayerBtn.addEventListener('click', function () {
 dropdown.addEventListener('change', function () {
   var searchFor = dropdown.value;
   console.log(characterList.search(searchFor));
+  Page_1.Page.showAllStats(characterList.search(searchFor));
 });
-},{"./class/CharacterList":"class/CharacterList.ts","./class/Character":"class/Character.ts","./class/Stats":"class/Stats.ts","./class/Avatar":"class/Avatar.ts","./class/Game":"class/Game.ts"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+buyBtn.addEventListener('click', function (e) {
+  if (!Game_1.Game.player) return;
+  var search = e.target.dataset.character;
+  var character = characterList.search(search);
+  /*let outcomeMsg: string = Game.player.handleBuying(<Character>character);
+  (<HTMLElement>document.getElementById('message')).innerText = outcomeMsg;*/
+
+  console.log(character);
+  console.log(Game_1.Game.player);
+  Game_1.Game.player.addMoney(100);
+  Game_1.Game.player.handleBuying(character);
+});
+window.addEventListener("beforeunload", function () {
+  if (Game_1.Game.player) {
+    localStorage.setItem("player", JSON.stringify(Game_1.Game.player));
+  }
+});
+},{"./class/Player":"class/Player.ts","./class/CharacterList":"class/CharacterList.ts","./class/Character":"class/Character.ts","./class/Stats":"class/Stats.ts","./class/Avatar":"class/Avatar.ts","./class/Game":"class/Game.ts","./class/Page":"class/Page.ts"}],"../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -451,7 +606,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37003" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44471" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
