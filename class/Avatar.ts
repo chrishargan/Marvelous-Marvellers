@@ -1,9 +1,14 @@
 class Avatar {
-    private portrait : string;
+    private _portrait : string;
 
 
     constructor(portrait: string) {
-        this.portrait = portrait;
+        this._portrait = portrait;
+    }
+
+
+    get portrait(): string {
+        return this._portrait;
     }
 }
 

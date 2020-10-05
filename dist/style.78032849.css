@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+body {
+    text-align: center;
+}
+
 .header {
     display: grid;
     place-items: center;
@@ -10,7 +14,9 @@
     background-color: red;
 }
 
-
+#character-window {
+    display: none;
+}
 #player-window {
     display: none;
 }
@@ -26,6 +32,20 @@
 
 #money {
     color: greenyellow;
+}
+
+#battle-window {
+    display: none;
+}
+
+.battle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.field-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 

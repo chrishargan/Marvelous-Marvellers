@@ -15,14 +15,45 @@
     </div>
 </header>
 <main>
-    <label for="characters">Choose Character </label>
-    <select name="characters" id="characters">
-    <option value="" selected="" disabled="" hidden="">Choose here</option>
-    </select>
+    <nav>
+        <a id="open-home" href="#">Home</a>
+        <a id="open-player" href="#">Player Info</a>
+        <a id="open-character" href="#">Buy/Check Characters</a>
+        <a id="open-battle" href="#">Battle!</a>
+    </nav>
 
-    <button id="open-player">Show Player Info</button>
+    <section id="home-window">
+        <h2>Welcome to the home page!</h2>
+        <p>
+            If you have not yet created a player, do so by clicking the Player Info link.
+        </p>
+        <p>
+            You start with 1000 credits, with which you can buy a character to add to your team. With this character you can fight others and bet credits to earn more credits!
+            Once you've earned enough credits, you can expand your team.
+        </p>
+    </section>
+
+    <section id="character-window">
+        <label for="characters">Choose Character </label>
+
+        <select name="characters" id="characters">
+            <option value="" selected="" disabled="" hidden="">Choose here</option>
+        </select>
+    </section>
+    <br>
+    <!--<button id="open-player">Show Player Info</button>-->
+    <br>
 
     <section id="player-window">
+        <h3 id="player-window-name">Create a player!</h3>
+        <br>
+
+        <h4>Team</h4>
+        <table id="player-window-team">
+            <tr>
+                <th>Character Name</th>
+            </tr>
+        </table>
         <label>Player Name
             <input type="text" id="player-name">
         </label>
@@ -44,7 +75,38 @@
         <h4 id="character-price"></h4>
         <button id="buy-character">Buy</button>
         <p id="message"></p>
+
+        <img id="character-avatar" src="" alt="Image of character">
     </section>
+
+    <section id="battle-window">
+        <h2>Battle Window</h2>
+
+        <label for="team-list">Your team:</label><br>
+        <select name="team-list" id="team-list">
+            <option value="" selected="" disabled="" hidden="">Choose your character to battle with</option>
+        </select>
+
+        <br>
+        <button id="battle-random">Fight Random Opponent</button>
+
+        <div class="battle-grid">
+            <div class="playerField">
+                <h2 id="chosen-character"></h2>
+                <div class="field-flex">
+                    <img id="chosen-character-img" src="" alt="Picture of your character">
+                </div>
+            </div>
+            <div class="opponentField">
+                <h2>Opponent</h2>
+                <div class="field-flex">
+                    Hello world
+                </div>
+            </div>
+        </div>
+
+    </section>
+
 </main>
 
 <footer></footer>

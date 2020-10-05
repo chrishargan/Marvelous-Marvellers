@@ -6,7 +6,7 @@ private id : number;
 private _name : string;
 private _slug : string;
 private _stats : Stats;
-private avatar : Avatar;
+private _avatar : Avatar;
 
 
     constructor(id: number, name: string, slug: string, stats: Stats, avatar : Avatar) {
@@ -14,7 +14,7 @@ private avatar : Avatar;
         this._name = name;
         this._slug = slug;
         this._stats = stats;
-        this.avatar = avatar;
+        this._avatar = avatar;
     }
 
     public showPrice() : number {
@@ -31,6 +31,10 @@ private avatar : Avatar;
 
     get stats(): Stats {
         return this._stats;
+    }
+
+    get avatar(): Avatar {
+        return this._avatar;
     }
 }
 
